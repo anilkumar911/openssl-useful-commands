@@ -22,3 +22,13 @@ $ openssl x509 -req -days 365000 -set_serial 01 \
    -CA ca-cert.pem \
    -CAkey ca-key.pem
 ```
+
+* Single line command to generate self signed sertificate:
+```
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365 -nodes
+```
+
+* Single line command to generate certificate with key usage extensions
+```
+openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out server.pem -days 7300 -subj '/CN=My Name/C=US/OU=My Unit/O=ACME' -addext "keyUsage = digitalSignature, keyEncipherment, dataEncipherment, cRLSign, keyCertSign" -addext "extendedKeyUsage = serverAuth, clientAuth"
+```
